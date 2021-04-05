@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:latest # use latest official postgres version
+    container_name: MySQL
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      - database_mysql.env # configure MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  postgressql:
+    image: postgres:latest # use latest official postgres version
+    container_name: PostgreSQL
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3307:3307"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data/
+    environment:
+      - database_postgres.env # configure PostgreSQL
+networks:
+            - app
+
+#Docker Networks
+networks:
+    app:
+        driver: bridge
+
+volumes:
+    mysql_data:
+    postgresql_data:
