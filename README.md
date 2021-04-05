@@ -11,3 +11,4 @@
 
 1. git clone 'https://github.com/lallexl/TestRepo.git' && cd /TestRepo/ && chmod +x startup.sh  #Загрузка необходимых файлов с репозитория 
 2. ./startup.sh  # Запуск скрипта подготовки ОС 
+
