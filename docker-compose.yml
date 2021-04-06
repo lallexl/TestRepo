@@ -1,31 +1,37 @@
-version: '3.3'
+version: '3.1'
 
 services:
   mysql:
     image: mysql:latest # use latest official postgres version
     container_name: MySQL
     restart: unless-stopped
-    tty: true
     ports:
       - "3306:3306"
     environment:
-      - database_mysql.env # configure MySQL
+     MYSQL_USER: rainbow
+     MYSQL_PASSWORD: password
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: rainbow
+     MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - app
 
   postgressql:
     image: postgres:latest # use latest official postgres version
     container_name: PostgreSQL
     restart: unless-stopped
-    tty: true
     ports:
-      - "3307:3307"
-    volumes:
-      - postgresql_data:/var/lib/postgresql/data/
+      - "5432:3307"
     environment:
-      - database_postgres.env # configure PostgreSQL
-networks:
-            - app
+            POSTGRES_USER: unicorn
+            POSTGRES_DB: unicorn
+            POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgresql_data:/var/lib/postgresql/
+    networks:
+      - app
 
 #Docker Networks
 networks:
